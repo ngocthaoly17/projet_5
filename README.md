@@ -1,16 +1,20 @@
-Ce projet permet de migrer un dataset CSV de patients vers une base MongoDB en utilisant Pandas et PyMongo, le tout orchestré avec Docker Compose.
+# 🏥 Migration MongoDB avec Docker
 
-Fonctionnalités
+Ce projet permet de **migrer un dataset CSV de patients vers une base MongoDB** en utilisant **Pandas** et **PyMongo**, le tout orchestré avec **Docker Compose**.
 
-Chargement d’un CSV contenant des données médicales.
+---
 
-Nettoyage des données (suppression des doublons, gestion des valeurs manquantes).
+## ✨ Fonctionnalités
+- Chargement d’un CSV contenant des données médicales.  
+- Nettoyage des données (suppression des doublons, gestion des valeurs manquantes).  
+- Mise en forme des noms (**Title Case**).  
+- Conversion des types (`Age` → int, `Billing Amount` → float).  
+- Insertion des données dans **MongoDB** (base `hospital_db`, collection `patients`).  
 
-Mise en forme des noms (Title Case).
+---
 
-Conversion des types (Age → int, Billing Amount → float).
+## 📂 Structure du projet
 
-Insertion des données dans MongoDB (base hospital_db, collection patients)."# Migration MongoDB avec Docker" 
 
 projet_5/
 │── docker-compose.yml
@@ -25,6 +29,7 @@ Installation & Lancement
 
 Cloner le projet
 
+```bash
 git clone https://github.com/ton-compte/projet_5.git
 cd projet_5
 
