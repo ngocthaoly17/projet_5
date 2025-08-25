@@ -34,12 +34,15 @@ projet_5/
 
 ⚡ Installation & Lancement
 1. Cloner le projet
+```bash
 git clone https://github.com/ton-compte/projet_5.git
 cd projet_5
+```
 
-2. Lancer les conteneurs Docker
+3. Lancer les conteneurs Docker
+```bash
 docker-compose up --build
-
+```
 
 Cela va lancer :
 
@@ -61,26 +64,22 @@ docker exec -it mongodb mongosh
 
 
 Puis dans mongosh :
-
+```bash
 show dbs
 use hospital_db
 show collections
 db.patients.findOne()
+```
 
 🛠️ Environnement
 
 Python 3.x
-
 Pandas
-
 PyMongo
-
 Docker & Docker Compose
-
 MongoDB
 
 📌 Notes
 
 Assurez-vous que le CSV healthcare_dataset.csv est bien présent dans le dossier csv/.
-
 Le script supprime toutes les données existantes dans la collection patients avant d’insérer les nouvelles données.
