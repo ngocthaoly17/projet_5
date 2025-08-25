@@ -20,9 +20,9 @@ projet_5/
 │── docker-compose.yml
 │── requirements.txt
 │── scripts/
-│   └── migration.py
+│ └── migration.py
 │── csv/
-│   └── healthcare_dataset.csv
+│ └── healthcare_dataset.csv
 
 
 Installation & Lancement
