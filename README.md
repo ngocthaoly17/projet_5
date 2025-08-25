@@ -30,7 +30,7 @@ projet_5/
 │   └── migration.py
 └── csv/
     └── healthcare_dataset.csv
-
+```
 
 ⚡ Installation & Lancement
 1. Cloner le projet
