@@ -5,17 +5,24 @@ Ce projet permet de **migrer un dataset CSV de patients vers une base MongoDB** 
 ---
 
 ## ✨ Fonctionnalités
+
 - Chargement d’un CSV contenant des données médicales.  
-- Nettoyage des données (suppression des doublons, gestion des valeurs manquantes).  
-- Mise en forme des noms (**Title Case**).  
-- Conversion des types (`Age` → int, `Billing Amount` → float).  
-- Insertion des données dans **MongoDB** (base `hospital_db`, collection `patients`).  
+- Nettoyage des données :  
+  - Suppression des doublons  
+  - Gestion des valeurs manquantes  
+- Mise en forme des noms (**Title Case**)  
+- Conversion des types :  
+  - `Age` → int  
+  - `Billing Amount` → float  
+- Insertion des données dans **MongoDB** :  
+  - Base `hospital_db`  
+  - Collection `patients`
 
 ---
 
 ## 📂 Structure du projet
 
-
+```text
 projet_5/
 ├── docker-compose.yml
 ├── requirements.txt
@@ -25,18 +32,12 @@ projet_5/
     └── healthcare_dataset.csv
 
 
-
-Installation & Lancement
-
-Cloner le projet
-
-```bash
+⚡ Installation & Lancement
+1. Cloner le projet
 git clone https://github.com/ton-compte/projet_5.git
 cd projet_5
 
-
-Lancer les conteneurs
-
+2. Lancer les conteneurs Docker
 docker-compose up --build
 
 
@@ -46,22 +47,40 @@ mongodb (base de données)
 
 migrator (script Python qui lit le CSV et alimente MongoDB)
 
-Vérifier les logs
-Si tout se passe bien, tu verras :
+3. Vérifier les logs
+
+Si tout se passe bien, tu verras :
 
 N documents insérés dans MongoDB
 
+🧐 Vérifier la base MongoDB
 
-Vérifier la base MongoDB
-
-Se connecter au conteneur MongoDB :
+Se connecter au conteneur MongoDB :
 
 docker exec -it mongodb mongosh
 
 
-Puis :
+Puis dans mongosh :
 
 show dbs
 use hospital_db
 show collections
 db.patients.findOne()
+
+🛠️ Environnement
+
+Python 3.x
+
+Pandas
+
+PyMongo
+
+Docker & Docker Compose
+
+MongoDB
+
+📌 Notes
+
+Assurez-vous que le CSV healthcare_dataset.csv est bien présent dans le dossier csv/.
+
+Le script supprime toutes les données existantes dans la collection patients avant d’insérer les nouvelles données.
