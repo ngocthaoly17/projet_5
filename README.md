@@ -17,12 +17,13 @@ Ce projet permet de **migrer un dataset CSV de patients vers une base MongoDB** 
 
 
 projet_5/
-│── docker-compose.yml
-│── requirements.txt
-│── scripts/
-│ └── migration.py
-│── csv/
-│ └── healthcare_dataset.csv
+├── docker-compose.yml
+├── requirements.txt
+├── scripts/
+│   └── migration.py
+└── csv/
+    └── healthcare_dataset.csv
+
 
 
 Installation & Lancement
