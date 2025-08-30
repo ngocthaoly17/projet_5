@@ -5,9 +5,14 @@ services:
     image: mongo:8.0
     container_name: mongodb
     restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: hospital_db
     ports:
       - "27017:27017"
     volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - mongo_data:/data/db
 
   migrator:
@@ -19,9 +24,12 @@ services:
       - ./csv:/app/csv
       - ./scripts:/app/scripts
     working_dir: /app/scripts
-    command: bash -c "pip install -r requirements.txt && sleep 10 && python migration.py && python test_migration.py"
+    command: bash -c "pip install -r requirements.txt && sleep 10 && python migration.py"
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/hospital_db
+      - MONGO_USER=data_engineer
+      - MONGO_PASS=de_password123
+      - MONGO_DB=hospital_db
+      - MONGO_HOST=mongodb
 
 volumes:
   mongo_data:
