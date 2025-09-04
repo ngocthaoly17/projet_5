@@ -24,7 +24,7 @@ class PatientCleaner:
         df = pd.read_csv(self.csv_path)
         initial_rows = len(df)
 
-        df = df.drop_duplicates(subset=["Name"])
+        df = df.drop_duplicates(subset=["Name"])  # Supprime doublons dans le CSV
         df = df.fillna("Unknown")
         df["Name"] = df["Name"].str.title()
         df["Age"] = df["Age"].astype(int)
@@ -42,39 +42,29 @@ class PatientMigrator:
         self.collection = collection
         self.user = user
 
-    def filter_existing(self):
-        existing_names = set(doc["Name"] for doc in self.collection.find({}, {"Name": 1, "_id": 0}))
-        self.df_new = self.df[~self.df["Name"].isin(existing_names)].copy()
-        filtered_out = len(self.df) - len(self.df_new)
-        print(f"Lignes déjà présentes dans MongoDB et donc non insérées : {filtered_out}")
-
     def assign_ids(self):
-        if self.df_new.empty:
+        if self.df.empty:
             self.start_id = None
             return
         last_id_doc = self.collection.find_one(sort=[("_id", -1)])
         self.start_id = last_id_doc["_id"] + 1 if last_id_doc else 1
-        self.df_new.reset_index(drop=True, inplace=True)
-        self.df_new["_id"] = self.df_new.index + self.start_id
+        self.df.reset_index(drop=True, inplace=True)
+        self.df["_id"] = self.df.index + self.start_id
 
     def insert(self):
-        if self.df_new.empty:
-            print("Aucun nouveau patient à insérer.")
+        if self.df.empty:
+            print("Aucun patient à insérer.")
             return
-        records = self.df_new.to_dict(orient="records")
+        records = self.df.to_dict(orient="records")
         self.collection.insert_many(records)
-        print(f"{len(records)} nouveaux documents insérés dans MongoDB par {self.user}, à partir de l'id {self.start_id}")
+        print(f"{len(records)} documents insérés dans MongoDB par {self.user}, à partir de l'id {self.start_id}")
 
     def migrate(self):
-        self.filter_existing()
         self.assign_ids()
         self.insert()
 
-# ----------------------------
-# Usage
-# ----------------------------
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     connector = MongoConnector()
     collection = connector.get_collection("patients")
 

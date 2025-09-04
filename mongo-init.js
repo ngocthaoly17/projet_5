@@ -1,6 +1,6 @@
 db = db.getSiblingDB("hospital_db");
 
-// Création admin
+
 db.createUser({
   user: "admin",
   pwd: "admin_password123",
@@ -11,7 +11,7 @@ db.createUser({
   ]
 });
 
-// Création data engineer
+
 db.createUser({
   user: "data_engineer",
   pwd: "de_password123",
@@ -20,7 +20,7 @@ db.createUser({
   ]
 });
 
-// Création analyst (read-only)
+
 db.createUser({
   user: "analyst",
   pwd: "analyst_password123",
