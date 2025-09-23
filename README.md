@@ -52,11 +52,9 @@ migrator (script Python qui lit le CSV et alimente MongoDB)
 
 3. Vérifier les logs
 
-Si tout se passe bien, tu verras :
-
 N documents insérés dans MongoDB
 
-🧐 Vérifier la base MongoDB
+Vérifier la base MongoDB
 
 Se connecter au conteneur MongoDB :
 
