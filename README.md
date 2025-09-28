@@ -32,7 +32,7 @@ projet_5/
     └── healthcare_dataset.csv
 └── docker-compose.yml
 └── mongo-init.js
-└── 
+└── README.md
 
 
 ```
@@ -46,7 +46,10 @@ cd projet_5
 
 3. Lancer les conteneurs Docker
 ```bash
-docker-compose up --build
+docker-compose build --no-cache
+
+docker-compose up
+
 ```
 
 Cela va lancer :
@@ -55,16 +58,24 @@ mongodb (base de données)
 
 migrator (script Python qui lit le CSV et alimente MongoDB)
 
-3. Vérifier les logs
-
 N documents insérés dans MongoDB
 
-Vérifier la base MongoDB
+3. Se connecter au conteneur MongoDB :
 
-Se connecter au conteneur MongoDB :
-
+```bash
 docker exec -it mongodb mongosh
+```
 
+4. Tester un rôle
+
+```bash
+docker exec -it mongodb mongosh -u admin -p admin_password123 --authenticationDatabase hospital_db
+
+docker exec -it mongodb mongosh -u data_engineer -p de_password123 --authenticationDatabase hospital_db
+
+docker exec -it mongodb mongosh -u analyst -p analyst_password123 --authenticationDatabase hospital_db
+
+```
 
 Puis dans mongosh :
 ```bash
@@ -85,4 +96,3 @@ MongoDB
 📌 Notes
 
 Assurez-vous que le CSV healthcare_dataset.csv est bien présent dans le dossier csv/.
-Le script supprime toutes les données existantes dans la collection patients avant d’insérer les nouvelles données.
