@@ -30,6 +30,11 @@ projet_5/
 │   └── migration.py
 └── csv/
     └── healthcare_dataset.csv
+└── docker-compose.yml
+└── mongo-init.js
+└── 
+
+
 ```
 
 ⚡ Installation & Lancement
